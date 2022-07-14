@@ -25,9 +25,11 @@ struct ContentView: View {
                 Section {
                     TextField("Enter your word", text: $newWord)
                         .textInputAutocapitalization(.never)
+                        .disableAutocorrection(true)
                 }
 
-                Section("Score: \(score)") {
+              
+                    Section {
                     ForEach(usedWords, id: \.self) { word in
                         HStack {
                             Image(systemName: "\(word.count).circle")
@@ -46,6 +48,14 @@ struct ContentView: View {
             }
             .toolbar {
                 Button("New Game", action: startGame)
+            }
+            .safeAreaInset(edge: .bottom) {
+                Text("Score: \(score)")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .font(.title)
             }
             
         }
